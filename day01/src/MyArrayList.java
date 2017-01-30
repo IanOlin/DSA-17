@@ -3,33 +3,57 @@ public class MyArrayList {
 	private int size;
 
 	public MyArrayList() {
-		// TODO
+		elems = new Cow[10];
+		size = 0;
 	}
 
 	public MyArrayList(int capacity) {
-		// TODO
+		elems = new Cow[capacity];
+		size = 0;
 	}
 
 	public void add(Cow c) {
-		// TODO
+		elems[size] = c;
+		size = size + 1;
 	}
 
 	public int size() {
-		// TODO
-		return -1;
+		return size;
 	}
 
 	public Cow get(int index) {
-		// TODO
-		return null;
+		if (index >= size) {
+			throw new IndexOutOfBoundsException();
+		}
+		return elems[index];
 	}
 
 	public Cow remove(int index) {
-		// TODO
-		return null;
+		Cow c = get(index);
+
+		if(size < elems.length/4){
+			int newSize = Math.max(elems.length/2, 10);
+			Cow [] temp = new Cow[newSize];
+			System.arraycopy(elems, 0, temp, 0,  size);
+			elems = temp;
+		}
+
+		System.arraycopy(elems,index+1, elems, index, size-index-1);
+		size = size - 1;
+		return c;
 	}
 
 	public void add(int index, Cow c) {
-		// TODO
+		get(index);
+
+		if(size == elems.length){
+			Cow [] temp = new Cow[elems.length*2];
+			System.arraycopy(elems, 0, temp, 0,  size);
+			elems = temp;
+		}
+
+		System.arraycopy(elems, index, elems, index+1, size-index);
+		elems[index] = c;
+		size = size + 1;
 	}
 }
