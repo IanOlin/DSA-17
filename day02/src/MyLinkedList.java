@@ -106,6 +106,7 @@ public class MyLinkedList<T> {
 			}
 			else{
 				head = head.next;
+				head.prev = null;
 			}
 			size--;
 			return temp.val;
@@ -124,6 +125,7 @@ public class MyLinkedList<T> {
 			}
 			else{
 				tail = tail.prev;
+				tail.next = null;
 			}
 			size--;
 			return temp.val;
