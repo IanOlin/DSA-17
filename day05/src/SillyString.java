@@ -34,7 +34,9 @@ public class SillyString {
         SillyString first = new SillyString("Hello");
 		SillyString second = new SillyString("World");
 
+		System.out.println(first.toString());
 		System.out.println(first.hashCode());
+		System.out.println(second.toString());
 		System.out.println(second.hashCode());
 	}
 }
