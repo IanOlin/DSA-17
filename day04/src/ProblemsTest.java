@@ -64,6 +64,10 @@ public class ProblemsTest {
         in = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
         out = Problems.removeKDigits(in, 5).toArray();
         assertThat(out, is(new Integer[] {1, 2, 3, 4}));
+
+        in = new int[]{2, 4, 1, 9};
+        out = Problems.removeKDigits(in, 2).toArray();
+        assertThat(out, is(new Integer[] {1, 9}));
     }
 
     private Node<Integer> arrToNodes(int[] arr) {
