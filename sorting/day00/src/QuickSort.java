@@ -3,16 +3,21 @@ public class QuickSort extends SortAlgorithm {
     private static final int INSERTION_THRESHOLD = 10;
 
     /**
-     * Best-case runtime:
-     * Worst-case runtime:
-     * Average-case runtime:
+     * Best-case runtime: O(nlogn)
+     * Worst-case runtime: O(n^2)
+     * Average-case runtime: O(nlogn)
      *
-     * Space-complexity:
+     * Space-complexity: n
      */
     @Override
     public int[] sort(int[] array) {
-        // TODO: Sort the array. Make sure you avoid the O(N^2) runtime worst-case
-        return new int[0];
+        if(isSorted(array)){
+            return array;
+        }
+        else {
+            quickSort(array, 0, array.length - 1);
+            return array;
+        }
     }
 
     /**
@@ -24,7 +29,11 @@ public class QuickSort extends SortAlgorithm {
      * @param high The ending index of the subarray being considered (inclusive)
      */
     public void quickSort(int[] a, int low, int high) {
-        // TODO
+        if (low < high) {
+            int pivot = partition(a, low, high);
+            quickSort(a, low, pivot - 1);
+            quickSort(a, pivot + 1, high);
+        }
     }
 
 
@@ -37,8 +46,25 @@ public class QuickSort extends SortAlgorithm {
      * @param high The ending index of the subarray being considered (inclusive)
      */
     public int partition(int[] array, int low, int high) {
-        // TODO
-        return 0;
+        int pivot = array[low];
+        int i = low;
+        for(int j = low + 1; j < high + 1; j++){
+            if (array[j] < pivot){
+                swap(array, i+1, j);
+                i++;
+            }
+        }
+        swap(array, low, i);
+        return i;
+    }
+
+    public static boolean isSorted(int[] data){
+        for(int i = 1; i < data.length; i++){
+            if(data[i-1] > data[i]){
+                return false;
+            }
+        }
+        return true;
     }
 
 }

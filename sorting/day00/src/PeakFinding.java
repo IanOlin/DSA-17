@@ -1,3 +1,4 @@
+import java.util.Arrays;
 
 public class PeakFinding {
 
@@ -50,8 +51,23 @@ public class PeakFinding {
 
 
     public static int findOneDPeak(int[] nums){
-    	// TODO
-        return -1;
+        int low = 0;
+        int high = nums.length -1;
+
+    	while(low < high){
+            int mid = (high+low)/2;
+            if (peak(mid, nums) == 0){
+                return mid;
+            }
+            else if (peak(mid,nums) == -1){
+                high = mid -1;
+            }
+            else{
+                low = mid + 1;
+            }
+        }
+        int mid = (high+low)/2;
+        return mid;
     }
 
     public static int[] findTwoDPeak(int[][] nums){
