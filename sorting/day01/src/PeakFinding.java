@@ -61,8 +61,42 @@ public class PeakFinding {
     }
 
     public static int[] findTwoDPeak(int[][] nums) {
-        // TODO
-        return null;
+        // Fails a test? No fuckin' clue
+        int loX = 0;
+        int loY = 0;
+        int hiX = nums[0].length;
+        int hiY = nums.length;
+
+        int midX = 0;
+        int midY = 0;
+        while (loX < hiX && loY < hiY){
+
+            midX = maxXIndex(midY, loX, hiX, nums);
+            midY = maxYIndex(midX, loY, hiY, nums);
+
+            int[] current = new int[] {midY, midX}; //FUCK THIS Y,X BULLSHIT
+
+            int xDirection = peakX(midX, midY, nums);
+            int yDirection = peakY(midX, midY, nums);
+
+            if (xDirection == 0 && yDirection ==0){
+                return current;
+            }
+            if (xDirection == 1){
+                loX = midX + 1;
+            }
+            if (xDirection == -1){
+                hiX = midX - 1;
+            }
+            if (yDirection == 1){
+                loY = midY + 1;
+            }
+            if (yDirection == -1){
+                hiY = midY - 1;
+            }
+        }
+
+        return new int[] {0,0};
     }
 
 }

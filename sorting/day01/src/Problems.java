@@ -42,7 +42,41 @@ public class Problems {
      */
     public static double[] runningMedian(int[] inputStream) {
         double[] runningMedian = new double[inputStream.length];
-        // TODO
+        //Make a max heap less than eff med and a min heap greater than eff med
+        PriorityQueue<Integer> maxHeap = maxPQ();
+        PriorityQueue<Integer> minHeap = minPQ();
+        double effectiveMedian = 0;
+        int even = 0;
+
+        for (int i = 0; i < inputStream.length; i++){
+            if (inputStream[i] < effectiveMedian){
+                maxHeap.offer(inputStream[i]);
+            }
+            else {
+                minHeap.offer(inputStream[i]);
+            }
+
+            if(minHeap.size() > maxHeap.size() + 1){
+                maxHeap.offer(minHeap.poll());
+            }
+            if (maxHeap.size() > minHeap.size() + 1){
+                minHeap.offer(maxHeap.poll());
+            }
+            even = 1 - even;
+            if(even == 0){
+                runningMedian[i] = ((double)minHeap.peek() + (double)maxHeap.peek())/2;
+            }
+            if(even == 1){
+                if(minHeap.size() < maxHeap.size()){
+                    runningMedian[i] = maxHeap.peek();
+                }
+                else{
+                    runningMedian[i] = minHeap.peek();
+                }
+            }
+            effectiveMedian = runningMedian[i];
+        }
+
         return runningMedian;
     }
 

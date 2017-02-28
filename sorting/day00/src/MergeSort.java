@@ -12,7 +12,7 @@ public class MergeSort extends SortAlgorithm {
      * Worst-case runtime: O(nlogn)
      * Average-case runtime:O(nlogn)
      *
-     * Space-complexity: O(nlong)
+     * Space-complexity: O(nlong) -> n
      */
     @Override
     public int[] sort(int[] array) {
