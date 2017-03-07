@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class BinarySearchTree<T extends Comparable<T>> {
@@ -28,8 +29,27 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
 
     public List<T> inOrderTraversal() {
-        // TODO
-        return null;
+        return iOTraversal(this.root);
+    }
+
+    public List<T> iOTraversal(TreeNode<T> root) {
+        List<T> res = new ArrayList<>();
+
+        if(root == null){
+            return res;
+        }
+
+        if (root.hasLeftChild()){
+            res.addAll(iOTraversal(root.leftChild));
+        }
+
+        res.add(root.key);
+
+        if (root.hasRightChild()){
+            res.addAll(iOTraversal(root.rightChild));
+        }
+
+        return res;
     }
 
     /**
@@ -66,8 +86,9 @@ public class BinarySearchTree<T extends Comparable<T>> {
             replacement = (n.hasRightChild()) ? n.rightChild : n.leftChild; // replacement is the non-null child
         else {
             // Case 3: two children
-            // TODO
-            replacement = null;
+            replacement = findPredecessor(n);
+            delete(replacement);
+            replacement.moveChildrenFrom(n);
         }
 
         // Put the replacement in its correct place, and set the parent.
@@ -96,13 +117,45 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
 
     private TreeNode<T> findPredecessor(TreeNode<T> n) {
-        // TODO
-        return null;
+        if(n.hasLeftChild()){
+            n = n.leftChild;
+            while (n.hasRightChild()){
+                n = n.rightChild;
+            }
+            return n;
+        }
+        else {
+            while(!n.isRightChild() && !n.isRoot()){
+                n = n.parent;
+            }
+            if (n.isRightChild()){
+                return n.parent;
+            }
+            else {
+                return null;
+            }
+        }
     }
 
     private TreeNode<T> findSuccessor(TreeNode<T> n) {
-        // TODO
-        return null;
+        if(n.hasRightChild()){
+            n = n.rightChild;
+            while (n.hasLeftChild()){
+                n = n.leftChild;
+            }
+            return n;
+        }
+        else {
+            while(!n.isLeftChild() && !n.isRoot()){
+                n = n.parent;
+            }
+            if (n.isLeftChild()){
+                return n.parent;
+            }
+            else {
+                return null;
+            }
+        }
     }
 
     /**
