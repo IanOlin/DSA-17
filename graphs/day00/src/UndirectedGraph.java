@@ -1,46 +1,59 @@
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class UndirectedGraph implements Graph {
+    HashMap<Integer, LinkedList<Integer>> graph;
+    List<Integer> vertices;
+    int numVertices;
+    int numEdges;
 
     public UndirectedGraph(int n) {
-        // TODO: Your code here
+        graph = new HashMap<Integer, LinkedList<Integer>>();
+        vertices = new ArrayList<Integer>();
+        numEdges = 0;
+        numVertices = n;
+        for (int i = 0; i < n; i++) {
+            graph.put(i, new LinkedList<Integer>());
+            vertices.add(i);
+        }
     }
 
     @Override
     public void addEdge(int v, int w) {
-        // TODO: Your code here
+        //O(1)
+        graph.get(v).add(w);
+        graph.get(w).add(v);
+        numEdges++;
     }
 
     @Override
     public List<Integer> vertices() {
-    	// TODO: Your code here
-        return null;
+        //O(1)
+    	return vertices;
     }
 
     @Override
     public int numVertices() {
-    	// TODO: Your code here
-        return 0;
+        //O(1)
+        return numVertices;
     }
 
     @Override
     public int numEdges() {
-    	// TODO: Your code here
-        return 0;
+    	//O(1)
+        return numEdges;
     }
 
     @Override
     public Iterable<Integer> getNeighbors(int v) {
-    	// TODO: Your code here
-        return null;
+        //O(1)
+    	return graph.get(v);
     }
 
     @Override
     public boolean hasEdgeBetween(int v, int w) {
-    	// TODO: Your code here
+    	if (graph.get(v).contains(w)){
+    	    return true;
+        }
         return false;
     }
 
