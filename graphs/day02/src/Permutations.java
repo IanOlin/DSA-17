@@ -1,41 +1,30 @@
 import com.sun.deploy.util.ArrayUtil;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Arrays;
+import java.util.*;
+import java.util.stream.*;
 
 public class Permutations {
 
     public static List<List<Integer>> permutations(List<Integer> A) {
-        List<List<Integer>> perms = new ArrayList();
-//        List<Integer> P = new ArrayList<>();
-//        List<Integer> a = new LinkedList<>();
-//
-//        permsHelp(A, P);
-        return perms;
+        int k = 0;
+        return permsHelp(A, k, new ArrayList<>());
     }
 
-    public static List<List<Integer>> permsHelp2 (List<Integer> A, List<List<Integer>> P){
-        if( A.size() == 0){
-
+    public static List<List<Integer>> permsHelp (List<Integer> A, int k, List<List<Integer>> res){
+        for (int i = k; i < A.size(); i++) {
+            java.util.Collections.swap(A, i, k);
+            permsHelp(A, (k+1), res);
+            java.util.Collections.swap(A, k, i);
         }
+        if (k == A.size() -1){
+            ArrayList<Integer> curr = new ArrayList<>(A);
+            res.add(curr);
+        }
+        if (res.size() == IntStream.rangeClosed(2, A.size()).reduce(1, (x, y) -> x * y)){
+            return res;
+        }
+        return null;
     }
 
-//    public static List<Integer> permsHelp(int A[], List<Integer> P){
-//        //A isn't mutable. Fuck this
-//        if (A.length == 0){
-//            System.out.println(P);
-//            return P;
-//        }
-//        else {
-//            for (int i = 0; i < A.length; i++) {
-//                P.add(A[i]);
-//                A = ArrayUtil
-//                permsHelp(A, P);
-//            }
-//        }
-//        return null;
-//    }
 
 }
