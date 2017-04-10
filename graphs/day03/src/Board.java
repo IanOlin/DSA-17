@@ -16,6 +16,7 @@ public class Board {
      */
     public Board(int[][] b) {
         tiles = b;
+        n = tiles.length;
     }
 
     /*
