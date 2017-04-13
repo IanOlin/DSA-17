@@ -40,6 +40,7 @@ public class BarnRepairTest {
             solution = BarnRepair.solve(M, S, C, occupied);
             System.out.print("Test case " + t);
 
+//            System.out.println("        "+answers[t]);
             if (solution != answers[t]) {
                 System.out.println(" fails");
                 passed = false;
